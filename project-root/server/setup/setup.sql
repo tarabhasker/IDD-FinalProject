@@ -1,7 +1,3 @@
-DROP DATABASE IF EXISTS Eternally;
-CREATE DATABASE Eternally;
-USE Eternally;
-
 CREATE TABLE users (
   id INT(11) NOT NULL AUTO_INCREMENT,
   full_name VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
