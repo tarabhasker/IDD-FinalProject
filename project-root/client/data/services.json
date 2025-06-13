@@ -1,0 +1,96 @@
+{
+    "services": [
+  {
+    "title": "Decoration",
+    "image": "images/indexloc.jpeg",
+    "description": "Unique themes and elegant décor to match your dream wedding style."
+  },
+  {
+    "title": "Dress and Accessories",
+    "image": "images/indexdress.jpeg",
+    "description": "Find the perfect gown, veil, and accessories to complete your look."
+  },
+  {
+    "title": "Event Planning",
+    "image": "images/indexplan.jpeg",
+    "description": "We organize everything from invitations to the last dance with care."
+  },
+  {
+    "title": "Invitation Cards",
+    "image": "images/indexinvite.jpeg",
+    "description": "Custom-designed invitation cards that set the tone for your special day."
+  }
+],
+    "details": {
+      "decoration": {
+        "description": "Our decoration team designs exquisite setups with customized themes, floral arrangements, and lighting to create unforgettable atmospheres.",
+        "items": [
+          {
+            "src": "images/decor1.jpeg",
+            "label": "Beach Theme",
+            "description": "A serene beach setup with soft pastels, shells, and breezy linens.",
+            "price": 580
+          },
+          {
+            "src": "images/decor2.jpeg",
+            "label": "Forest Theme",
+            "description": "Lush greenery and wooden accents for a natural forest vibe.",
+            "price": 720
+          },
+          {
+            "src": "images/decor3.jpeg",
+            "label": "Church Theme",
+            "description": "Elegant white floral arrangements and candlelight in a traditional setting.",
+            "price": 650
+          }
+        ]
+      },
+      "dress-and-accessories": {
+        "description": "Explore our curated collection of bridal gowns, veils, jewelry, and accessories to find the perfect combination for your big day.",
+        "items": [
+          {
+            "src": "images/dress1.jpeg",
+            "label": "Floral Dress",
+            "description": "A whimsical dress with embroidered floral patterns for a romantic feel.",
+            "price": 890
+          },
+          {
+            "src": "images/dress2.jpeg",
+            "label": "Princess Gown",
+            "description": "A voluminous ball gown that makes you feel like royalty.",
+            "price": 999
+          },
+          {
+            "src": "images/dress3.jpeg",
+            "label": "Classy Silhouette",
+            "description": "A timeless design that radiates elegance and confidence.",
+            "price": 910
+          }
+        ]
+      },
+      "event-planning": {
+        "description": "We coordinate everything from vendor sourcing to timeline planning, ensuring your wedding day unfolds seamlessly and stress-free.",
+        "items": [
+          {
+            "src": "images/plan1.jpeg",
+            "label": "Greece Theme",
+            "description": "Inspired by Santorini — white arches, blue domes, and sea breeze.",
+            "price": 840
+          },
+          {
+            "src": "images/plan2.jpeg",
+            "label": "Dubai Luxury",
+            "description": "Gold accents, chandeliers, and lavish settings fit for royalty.",
+            "price": 980
+          },
+          {
+            "src": "images/plan3.jpeg",
+            "label": "Italy Romance",
+            "description": "Rustic Italian charm with vineyards and warm tones.",
+            "price": 870
+          }
+        ]
+      }
+    }
+  }
+  
