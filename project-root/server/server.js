@@ -13,7 +13,7 @@ const PORT = 5050;
 app.use(cors());
 app.use(express.json());
 
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const db = mysql.createConnection({
   host    : process.env.DB_HOST,
