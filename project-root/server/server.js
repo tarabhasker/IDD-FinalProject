@@ -558,14 +558,13 @@ function resetDatabase() {
   const sqlContent = fs.readFileSync(sqlPath, 'utf8');
 
   const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT || 3306,
-    user: process.env.DB_USER,
+    host    : process.env.DB_HOST,
+    user    : process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
+    port    : process.env.DB_PORT || 3306,
     multipleStatements: true
   });
-  
 
   connection.connect(err => {
     if (err) {
@@ -583,6 +582,7 @@ function resetDatabase() {
     });
   });
 }
+
 
 
 /* ───── nodemailer transport (Gmail App-Password) ───── */
