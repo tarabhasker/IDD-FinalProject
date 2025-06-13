@@ -175,7 +175,7 @@ window.MyPurchasesPage = {
     
       try {
         const [purchaseRes, servicesRes] = await Promise.all([
-          fetch('http://localhost:5050/api/get-purchases', {
+          fetch('https://idd-finalproject.onrender.com/api/get-purchases', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ user_id: userId })
@@ -231,7 +231,7 @@ window.MyPurchasesPage = {
       const user = JSON.parse(localStorage.getItem('loggedInUser'));
       const userId = user?.id;
     
-      fetch('http://localhost:5050/api/update-purchase', {
+      fetch('https://idd-finalproject.onrender.com/api/update-purchase', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -275,7 +275,7 @@ window.MyPurchasesPage = {
       }
     
       try {
-        const res = await fetch('http://localhost:5050/api/delete-purchase', {
+        const res = await fetch('https://idd-finalproject.onrender.com/api/delete-purchase', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_id: userId, purchase_id: purchaseId })

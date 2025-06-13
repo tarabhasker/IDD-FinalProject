@@ -162,7 +162,7 @@ methods: {
     const user = JSON.parse(localStorage.getItem('loggedInUser')||'null');
     if (!user?.id) { this.cart = []; return; }
 
-    const res  = await fetch(`http://localhost:5050/api/get-cart?user_id=${user.id}`);
+    const res  = await fetch(`https://idd-finalproject.onrender.com/api/get-cart?user_id=${user.id}`);
     const resp = await res.json();
     if (!resp.success) { this.cart = []; return; }
 
@@ -193,7 +193,7 @@ methods: {
     else         this.cart.splice(i,1);
 
     try{
-      await fetch('http://localhost:5050/api/update-cart',{
+      await fetch('https://idd-finalproject.onrender.com/api/update-cart',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({

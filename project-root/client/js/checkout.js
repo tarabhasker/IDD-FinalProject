@@ -568,7 +568,7 @@ window.CheckoutPage = {
       if (!logged?.id) { this.cart = []; return; }
 
       // ① rows from database
-      const res  = await fetch(`http://localhost:5050/api/get-cart?user_id=${logged.id}`);
+      const res  = await fetch(`https://idd-finalproject.onrender.com/api/get-cart?user_id=${logged.id}`);
       const resp = await res.json();
       if (!resp.success) { this.cart = []; return; }
 
@@ -593,7 +593,7 @@ window.CheckoutPage = {
       if (!stored?.email) return;          // guest checkout
   
       try {
-        const res  = await fetch(`http://localhost:5050/api/get-user?email=${encodeURIComponent(stored.email)}`);
+        const res  = await fetch(`https://idd-finalproject.onrender.com/api/get-user?email=${encodeURIComponent(stored.email)}`);
         const resp = await res.json();
         if (resp.success) Object.assign(stored, resp.user);
       } catch {/* ignore network errors – fall back to localStorage copy */}
@@ -643,7 +643,7 @@ window.CheckoutPage = {
       this.cardSaving=true;
 
       try{
-        const res=await fetch('http://localhost:5050/api/add-card',{
+        const res=await fetch('https://idd-finalproject.onrender.com/api/add-card',{
           method:'POST',headers:{'Content-Type':'application/json'},
           body:JSON.stringify({...this.newCard,
                               user_id: JSON.parse(localStorage.loggedInUser).id})
@@ -660,7 +660,7 @@ window.CheckoutPage = {
     /* ─ delete card ─ */
     async removeCard(id){
       if(!confirm('Delete this card?')) return;
-      const res=await fetch('http://localhost:5050/api/delete-card',
+      const res=await fetch('https://idd-finalproject.onrender.com/api/delete-card',
                     {method:'POST',headers:{'Content-Type':'application/json'},
                     body:JSON.stringify({id})});
       const j = await res.json();
@@ -672,7 +672,7 @@ window.CheckoutPage = {
     async fetchCards(){
       const user=JSON.parse(localStorage.loggedInUser||'null');
       if(!user?.id) return;
-      const r=await fetch(`http://localhost:5050/api/get-cards?user_id=${user.id}`);
+      const r=await fetch(`https://idd-finalproject.onrender.com/api/get-cards?user_id=${user.id}`);
       const j=await r.json();
       if(j.success) this.cards=j.cards;
     },
@@ -722,7 +722,7 @@ window.CheckoutPage = {
       };
     
       try {
-        const res = await fetch('http://localhost:5050/api/checkout', {
+        const res = await fetch('https://idd-finalproject.onrender.com/api/checkout', {
           method : 'POST',
           headers: { 'Content-Type':'application/json' },
           body   : JSON.stringify(order)
@@ -737,7 +737,7 @@ window.CheckoutPage = {
           localStorage.removeItem('checkout_location');
           this.cart = [];
         
-          await fetch('http://localhost:5050/api/delete-cart', {
+          await fetch('https://idd-finalproject.onrender.com/api/delete-cart', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ user_id: loggedUser.id })

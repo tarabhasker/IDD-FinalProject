@@ -112,7 +112,7 @@ window.LoginPage = {
         return;
       }
 
-      fetch('http://localhost:5050/api/login', {
+      fetch('https://idd-finalproject.onrender.com/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: this.email, password: this.password })
@@ -145,7 +145,7 @@ window.LoginPage = {
         return;
       }
 
-      fetch('http://localhost:5050/api/register', {
+      fetch('https://idd-finalproject.onrender.com/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

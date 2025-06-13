@@ -229,7 +229,7 @@ window.AccountPage = {
 
     const stored = JSON.parse(localStorage.getItem('loggedInUser')||'null');
     if (stored?.email) {
-      fetch(`http://localhost:5050/api/get-user?email=${encodeURIComponent(stored.email)}`)
+      fetch(`https://idd-finalproject.onrender.com/api/get-user?email=${encodeURIComponent(stored.email)}`)
         .then(r=>r.json()).then(resp=>{
           if(resp.success){
             this.user = resp.user;
@@ -265,7 +265,7 @@ window.AccountPage = {
     cancelEdit(){ this.populateProfileForm(); },
     saveProfile(){
       if(!this.firstName || !this.email){ this.error='Name and email required'; return;}
-      fetch('http://localhost:5050/api/update-profile',{
+      fetch('https://idd-finalproject.onrender.com/api/update-profile',{
         method:'POST', headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
           oldEmail:this.user.email,
@@ -299,7 +299,7 @@ window.AccountPage = {
     changePassword(){
       if(!this.oldPassword || !this.newPassword){
         this.error='Both password fields required'; return;}
-      fetch('http://localhost:5050/api/change-password',{
+      fetch('https://idd-finalproject.onrender.com/api/change-password',{
         method:'POST', headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
           email:this.user.email,

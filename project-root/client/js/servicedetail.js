@@ -281,7 +281,7 @@ window.ServiceDetailPage = {
       const logged = JSON.parse(localStorage.getItem('loggedInUser')||'null');
       if (!logged?.id) { this.$router.push('/login'); return; }
 
-      fetch('http://localhost:5050/api/add-to-cart',{
+      fetch('https://idd-finalproject.onrender.com/api/add-to-cart',{
         method:'POST', headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
           user_id : logged.id,
@@ -297,7 +297,7 @@ window.ServiceDetailPage = {
       const logged = JSON.parse(localStorage.getItem('loggedInUser')||'null');
       if (!logged?.id){ this.addedItems=[]; return; }
 
-      fetch(`http://localhost:5050/api/get-cart?user_id=${logged.id}`)
+      fetch(`https://idd-finalproject.onrender.com/api/get-cart?user_id=${logged.id}`)
         .then(r=>r.json())
         .then(resp=>{
           if(resp.success){
