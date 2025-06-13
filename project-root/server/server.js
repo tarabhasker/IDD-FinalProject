@@ -32,6 +32,8 @@ db.connect(err => {
 
 const bcrypt = require('bcrypt');
 
+
+
 app.post('/api/register', async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password)
@@ -548,39 +550,33 @@ app.post('/api/update-purchase', (req, res) => {
 
 
 
-
-
-
-// Add this route to trigger the DB reset
-app.post('/api/reset-database', (req, res) => {
+function resetDatabase() {
   const sqlPath = path.join(__dirname, 'setup', 'setup.sql');
   const sqlContent = fs.readFileSync(sqlPath, 'utf8');
 
   const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',      // default for XAMPP is empty string
+    password: '',
     multipleStatements: true
   });
 
   connection.connect(err => {
     if (err) {
       console.error('❌ MySQL connection error:', err);
-      return res.status(500).json({ success: false, error: 'MySQL connection failed' });
+      return;
     }
 
-    connection.query(sqlContent, (err, result) => {
+    connection.query(sqlContent, (err) => {
       connection.end();
       if (err) {
         console.error('❌ Error executing SQL:', err);
-        return res.status(500).json({ success: false, error: 'SQL execution failed' });
+      } else {
+        console.log('✅ Database reset and recreated');
       }
-
-      console.log('✅ Database reset completed');
-      res.json({ success: true, message: 'Database reset and recreated' });
     });
   });
-});
+}
 
 
 /* ───── nodemailer transport (Gmail App-Password) ───── */
@@ -647,6 +643,7 @@ app.get(/^(?!\/api).*/, (req, res) =>
 );
 
 /* ───── start server ───── */
-app.listen(PORT, () =>
-  console.log(`✅ Express server running at http://localhost:${PORT}`)
-);
+app.listen(PORT, () => {
+  console.log(`✅ Express server running at http://localhost:${PORT}`);
+  resetDatabase(); // ← Automatically reset the DB on startup
+});
