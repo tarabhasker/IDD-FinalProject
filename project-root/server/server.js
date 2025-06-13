@@ -9,7 +9,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();                // if you want to load env vars
 
 const app  = express();
-const PORT = 5050;
+const PORT = process.env.PORT || 5050;
 app.use(cors());
 app.use(express.json());
 
@@ -655,3 +655,4 @@ app.listen(PORT, () => {
     resetDatabase();
   }  
 });
+
