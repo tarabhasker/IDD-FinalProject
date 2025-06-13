@@ -651,5 +651,7 @@ app.get(/^(?!\/api).*/, (req, res) =>
 /* ───── start server ───── */
 app.listen(PORT, () => {
   console.log(`✅ Express server running at http://localhost:${PORT}`);
-  resetDatabase(); // ← Automatically reset the DB on startup
+  if (process.env.AUTO_RESET === 'true') {
+    resetDatabase();
+  }  
 });
