@@ -3,9 +3,11 @@ window.LoginPage = {
     <div class="login-container d-flex min-vh-100">
 
       <div 
-        class="image-panel w-50 d-none d-md-flex flex-column justify-content-center align-items-center text-white p-5 text-center"
+        class="image-panel d-none d-sm-flex flex-column justify-content-center align-items-center text-white p-5 text-center"
+        :class="{ 'w-100': isLandscapeMobile, 'w-50': !isLandscapeMobile }"
         :style="{ backgroundImage: 'url(' + (viewMode === 'login' ? 'images/vintage1.jpg' : 'images/index1.jpeg') + ')' }"
       >
+
         <div class="image-panel-overlay"></div>
         <div class="image-panel-content anim-item" style="animation-delay: 0.3s;">
           <img src="images/logo.svg" alt="Eternally Logo" style="height: 80px; margin-bottom: 2rem;">
@@ -22,7 +24,8 @@ window.LoginPage = {
 
       <div class="form-panel w-100 w-md-50 d-flex justify-content-center align-items-center p-md-5 py-5">
         <div class="auth-card anim-item" style="animation-delay: 0.2s;">
-          <transition name="form-fade" mode="out-in">
+          <div class="auth-card-scroll">
+            <transition name="form-fade" mode="out-in">
             
             <div v-if="viewMode === 'login'" key="login">
               <div class="text-center">
@@ -58,15 +61,17 @@ window.LoginPage = {
             </div>
 
           </transition>
+          </div>
         </div>
       </div>
 
       <div class="modal fade" id="forgotModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Reset Password</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><p>Password reset is not available in this demo.</p></div><div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div></div></div></div>
-      <div class="toast-container position-fixed bottom-0 end-0 p-3"><div class="toast align-items-center text-bg-success border-0" ref="toast" role="alert"><div class="d-flex"><div class="toast-body">Login successful! 🎉</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div></div></div>
+      <div class="toast-container position-fixed bottom-0 end-0 p-3"><div class="toast align-items-center text-bg-success border-0" ref="toast" role="alert"><div class="d-flex"><div class="toast-body">Login successful!</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div></div></div>
     </div>
   `,
   data() {
     return {
+      isLandscapeMobile: false,
       viewMode: 'login',
       email: '', password: '', rememberMe: false,
       name: '', confirmPassword: '',
@@ -74,9 +79,19 @@ window.LoginPage = {
       nameError: false, emailError: false, passwordError: false, confirmPasswordError: false
     };
   },
-  mounted() { document.body.style.paddingTop = '0'; },
-  beforeUnmount() { document.body.style.paddingTop = '70px'; },
+  mounted() {
+    document.body.style.paddingTop = '0';
+    this.updateLandscapeFlag();
+    window.addEventListener('resize', this.updateLandscapeFlag);
+  },
+  beforeUnmount() {
+    document.body.style.paddingTop = '70px';
+    window.removeEventListener('resize', this.updateLandscapeFlag);
+  },
   methods: {
+    updateLandscapeFlag() {
+      this.isLandscapeMobile = window.innerWidth < 768 && window.innerWidth > window.innerHeight;
+    },
     /* ---------- switches ---------- */
     switchToRegister() { this.clearFormState(); this.viewMode = 'register'; },
     switchToLogin()    { this.clearFormState(); this.viewMode = 'login';    },

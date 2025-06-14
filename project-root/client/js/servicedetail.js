@@ -17,7 +17,7 @@ window.ServiceDetailPage = {
     >
 
       <div v-if="pageReady">
-        <div class="container d-flex justify-content-between align-items-start flex-wrap gap-4 mb-4 px-3 px-md-4 fade-in-up">
+        <div class="container d-flex justify-content-between align-items-start flex-wrap gap-4 mb-4 fade-in-up top-button-section">
           <div class="flex-grow-1" style="min-width: 250px;">
             <h1 style="font-size: 3.2rem; font-weight: 500; color: #2C3930; margin-bottom: 1.5rem;">
               {{ serviceTitle }}
@@ -110,7 +110,7 @@ window.ServiceDetailPage = {
         </div>
 
         <div class="container px-3 px-md-4 mb-4 d-flex justify-content-end fade-in-up" style="--animation-delay: 0.3s;">
-            <div class="d-flex align-items-center bg-light rounded-pill shadow-sm px-3" style="height: 48px; min-width: 400px; max-width: 500px; background-color: #f4f2ef;">
+            <div class="d-flex align-items-center bg-light rounded-pill shadow-sm px-3 search-bar-wrapper" style="height: 48px; background-color: #f4f2ef; width: 100%; max-width: 500px;">
                 <input
                   v-model="searchQuery"
                   type="text"

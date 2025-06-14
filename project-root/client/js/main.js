@@ -8,15 +8,42 @@ const App = {
       <navbar v-if="showLayout"></navbar>
       <router-view></router-view>
       <app-footer v-if="showLayout"></app-footer>
+
+      <!-- Scroll to Top Button -->
+      <button 
+        :class="['scroll-to-top-btn', { show: showScrollButton }]"
+        @click="scrollToTop"
+      >
+        <i class="bi bi-arrow-up"></i>
+      </button>
     </div>
   `,
+  data() {
+    return {
+      showScrollButton: false
+    };
+  },
   computed: {
     showLayout() {
-      // This checks the route's metadata. If 'hideLayout' is true, it returns false.
       return !this.$route.meta.hideLayout;
     }
+  },
+  methods: {
+    handleScroll() {
+      this.showScrollButton = window.scrollY > 200;
+    },
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 };
+
 
 const HomePage = {
   template: `
@@ -118,9 +145,16 @@ const HomePage = {
   methods: {
     truncate(text, length) {
       return text.length > length ? text.slice(0, length) + '...' : text;
+    },
+    handleScroll() {
+      this.showScrollButton = window.scrollY > 200;
+    },
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   },
   mounted() {
+    window.addEventListener('scroll', this.handleScroll);
     // Inject slideshow logic
     const images = ['images/index1.jpeg', 'images/index2.jpeg'];
     const section = document.getElementById('heroSection');
@@ -170,6 +204,59 @@ const HomePage = {
     if (servicesSection) {
       observer.observe(servicesSection);
     }
+
+    // Testimonials Observer
+    const testimonialEls = document.querySelectorAll('.testimonial');
+
+    const testimonialObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const el = entry.target;
+
+          if (entry.isIntersecting) {
+            el.classList.add('visible');
+          } else {
+            el.classList.remove('visible');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    // Staggered transition delay per element
+    testimonialEls.forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.25}s`;
+      testimonialObserver.observe(el);
+    });
+
+    // Instagram Animation Observer
+    const instaEls = document.querySelectorAll('.insta-link');
+
+    const instaObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const el = entry.target;
+          if (entry.isIntersecting) {
+            el.classList.add('visible');
+          } else {
+            el.classList.remove('visible');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    instaEls.forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.2}s`; // stagger entry
+      instaObserver.observe(el);
+    });
+
+
+
+
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 };
 
@@ -192,8 +279,12 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0, behavior: 'smooth' };
+  }
 });
+
 
 // MODIFIED: Create the app using the new main App component
 const app = createApp(App);
